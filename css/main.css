@@ -1,0 +1,474 @@
+/* Alt der står grid-row ved bestemmer hvilken række elementet kommer til at ligge på */
+/* Alt der står grid-column ved bestemmer hvor elementet starter og slutter på grid (1 længst til venstre, 13 (5 på mobile) længst til højre) */
+/* Farver der bliver brugt på siden:
+    Benzin : rgba(102, 153, 153, 1)
+    Karry Gul : rgba(235, 189, 0, 1)
+    Pistacie Grøn : rgba(173, 172, 112, 1)
+    Mat Lyserød : rgba(241, 173, 136, 1)
+    Knækket Hvid : rgba(247, 230, 219, 1)
+    Baby Blå : rgba(224, 235, 231, 1)
+    Der bruges rgba, da a'et (det sidste tal i parantesen) giver os mulighed for at ændre i opaciteten på farverne, 
+    så de ikke kommer til at være lige så kraftige som de ellers ville være
+*/
+
+
+/* Fælles for mobile og desktop*/
+body{ 
+    font-family: open-sans,sans-serif; /* Der sættes en fælles font, vægt og stil for alt skrift på siden med de tre linjer her */
+    font-weight: 400;
+    font-style: normal;
+    background-color: rgba(247, 230, 219, .6);
+}
+
+h1, h2{
+    font-family: leander-script-pro,sans-serif; /* Her sættes der en fælles font for alle h1 og h2 elementer*/
+    font-weight: 700;
+    font-style: normal;  
+}
+
+h2{
+    font-size: 3em;
+}
+
+img{
+    width:100%; /* Alle billeder sættes til at have 100% i width, så de fylder hele det element de er i*/
+}
+
+@media only screen and (max-width: 720px){ /* Alt der står i denne gælder KUN for mobile, da skærm max-width er sat til 720px */
+    #wrapper{
+        display: grid; /* div'en med id="wrapper" bliver lavet til et grid, hvori alt indholdet ligger*/
+        grid-gap: 10px; /*Der sættes et 10 pixel mellemrum mellem grid */
+        grid-template-columns: repeat(4, 1fr); /* 4 columns, der hver især er 1 fraction*/
+        grid-auto-rows:minmax(100px, auto); /* Rows er minimum 100px i højde og kan være så høje som nødvendigt */
+    }
+
+    #desknav{
+        display:none; /*Får display none, så det bare kommer til at være burger menuen når man er er på mobile devices*/
+    }
+
+    .boutique{
+        grid-row: 1;
+        grid-column: 1/4;
+        width: 80%;
+        margin-left: 25px;
+    }
+
+    #spar{
+        grid-row: 2;
+        grid-column: 1/5;
+    }
+
+    #produkter{
+        grid-row: 3;
+        grid-column: 1/5;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* Der nestes et grid, for at kunne sætte tingene op ift. #produkter linket i nav baren*/
+        grid-gap: 10px;
+        grid-auto-rows:minmax(100px, auto);
+    }
+
+    #art1{
+        grid-column: 1/5;
+        grid-row: 1;
+    }
+
+    #art1 img{
+        width:30%;
+        grid-row: 1;
+        grid-column: 1/3;
+    }
+
+    .lotion{
+        grid-column: 3/5;
+        grid-row: 1;
+    }
+
+    #art2{
+        grid-column: 1/3;
+        grid-row: 2;
+    }
+
+    #produkt_tbl{
+        grid-row: 3;
+        grid-column: 1/5;
+    }
+
+    #produkt_tbl img{
+        width:125px;
+        height: 125px;
+    }
+
+
+    #omos{
+        grid-row: 4;
+        grid-column: 1/5;
+    }
+
+    #kontakt{
+        grid-row: 5;
+        grid-column: 1/5;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* Der nestes et grid, for at kunne sætte tingene op lettere*/
+        grid-gap: 10px;
+        grid-auto-rows:minmax(100px, auto);
+        text-align: center;
+    }
+
+    #kundeservice{
+        grid-column: 1/2;
+        width:20%;
+    }
+
+    #openinghours{
+        grid-column: 2/3;
+    }
+
+    #adresse{
+        grid-column: 3/4;
+    }
+
+    #om_laboutique{
+        grid-column: 4/5;
+    }
+
+    footer{
+        grid-row: 6;
+        grid-column: 1/5;
+    }
+
+    #betalings{
+        float:left;
+        width:20%;
+    }
+
+    #follow{
+        float: right;
+    }
+
+    .social{
+        width:10%;
+    }
+
+    /* Burgermenu */
+    #myNav .overlay-content .active{
+        color:rgb(197, 197, 197);
+    }
+
+    #mobnav{
+        grid-column: 3/5;
+        grid-row: 1;
+        margin-top:10px;
+        text-align: center;
+        margin-bottom: 80px;
+        position: sticky;
+        top:0;
+    }
+
+    nav img{
+        width:100px;
+        float: left;
+    }
+
+    #open{
+        float:right;
+        font-size: 50px;
+        margin-right:12px;
+        margin-top:6px;
+        z-index: 1;
+        position: sticky;
+        cursor:pointer;
+        color: black;
+    }
+
+    .overlay {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.9);
+        overflow-x: hidden;
+        transition: 0.5s;
+    }
+    
+    .overlay-content {
+        position: relative;
+        top: 25%;
+        width: 100%;
+        text-align: center;
+        margin-top: 30px;
+    }
+        
+    .overlay a {
+        padding: 8px;
+        text-decoration: none;
+        color: #e56cff;
+        display: block;
+        transition: 0.3s;
+        font-size: 60px;
+    }
+        
+    .overlay a:hover, .overlay a:focus {
+        color: #ffffff;
+    }
+        
+    .overlay .closebtn {
+        position: absolute;
+        top: 20px;
+        right: 45px;
+        font-size:80px;
+    }
+}
+
+@media only screen and (min-width:720px){ /* Alt der står i denne gælder kun skærme der er bredere end 720px */
+    #wrapper{
+        display: grid; /* div'en med id="wrapper" bliver lavet til et grid, hvori alt indholdet ligger*/
+        grid-template-columns: repeat(12, 1fr); /* 12 columns, der hver især er 1 fraction*/
+        grid-gap: 10px; /*Der sættes et 10 pixel mellemrum mellem grid */
+        grid-auto-rows:minmax(100px, auto); /* Rows er minimum 100px i højde og kan være så høje som nødvendigt */
+    }
+    
+    #mobnav{
+        display:none; /*Får display none, så det bare kommer til at være den normale nav når man er er på mobile devices*/
+    }
+
+    .boutique{
+       grid-row: 1;
+       grid-column: 5/10;
+       width: 70%; /* Width sættes op, da det ellers er for lille */
+       margin-top: 15px; /* får billedet til at rykke sig lidt ned, så det ikke flugter helt med toppen */
+        /* Trækker billedet lidt mod venstre, for at sætte det som i mockup'en */
+    }
+
+    #desknav{
+        grid-row: 2; 
+        grid-column: 3/10; /* Den sættes til at være en smule smallere end resten af relementerne*/
+        margin-top: 20px; /* Rykker logoet en smule ned fra toppen af siden */
+    }
+
+    #desknav a{
+        text-decoration: none; /* Fjerner stregen under anchor*/
+        font-size: 2.8em; /* Linkene sættes til at have en størrelse på 3em. (Hvis standard fonten i den browser man bruger f.eks. er 16 px, vil dette være 1em og derfor 3em=48px)*/
+        color:#707070; /* Fontens farve bestemmes, så den ikke er den standard blå anchor tag farve */
+    }
+
+    nav ul {  
+        display: table; /*Her laves et table i ul'en der ligger i nav baren, hvor vi med de næste punkter sørger for at centrere de forskellige i listen*/
+        width: 100%; 
+        list-style: none;
+    }
+    nav ul li {
+        display: table-cell;
+        text-align: center; /* Vi vil gerne centrere de to miderste elementer */
+    }
+
+    nav ul li:first-child {
+        text-align: left; /* Den første bliver sat til venstre, så vi skaber noget mellemrum mellem dem og får bredt dem lidt mere ud */
+    }
+    nav ul li:last-child {
+        text-align: right; /* Det samme gøres her, bare til højre med det sidste element */
+    }
+
+    #spar{
+        grid-row: 3;
+        grid-column: 1/13;
+        border-top-style: solid;
+        border-top-color: black;
+        border-top-width:1px;
+        padding-top:20px;
+        margin-top:-40px;
+        margin-bottom: 110px;
+    }
+
+    #produkter{
+        grid-row: 4;
+        grid-column: 2/12;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr); /* Der nestes et grid, for at kunne sætte tingene op ift. #produkter linket i nav baren*/
+        grid-gap: 10px;
+        grid-auto-rows:minmax(100px, auto);
+        
+    }
+
+    #art1{
+        grid-row: 1;
+        grid-column: 1/13;
+        height: 100%;
+    }
+
+    #art1 img{
+        width: 30%;
+        height:100%;
+    }
+
+    .lotion{
+         float:right;
+         width: 65%;
+         padding-left:25px;
+         min-height: 100%;
+         border-radius: 10px;
+         background-color: rgba(241, 173, 136, .5);
+    }
+
+    .lotion p{
+        font-size: 1.3em;
+    }
+
+    #art2{
+        grid-row: 2;
+        grid-column: 1/13;
+        height: 100%;
+        margin-top:30px;
+    }
+
+    #art2 img{
+        width: 30%;
+        height:100%;
+        float:right;
+    }
+
+    .brush{
+         float:left;
+         width: 65%;
+         padding-left:25px;
+         min-height: 100%;
+         background-color: rgba(173, 172, 112, .5);
+         border-radius: 10px;
+    }
+
+    .brush p{
+        font-size: 1.3em;
+    }
+
+    #produkt_tbl{
+        grid-row: 3;
+        grid-column: 2/12;
+        margin-top:50px;
+    }
+
+    #produkt_tbl img {
+        width:300px;
+        height:300px;
+    }
+
+    .left{
+        width:80%; 
+        float:left; 
+        margin-top:100px;
+    }
+
+    .left_p{
+        opacity: 50%; 
+        float:left; 
+        margin-left:100px;
+    }
+
+    .mid{
+        width:80%; 
+        text-align: center; 
+        margin-top:100px;
+    }
+
+    .mid_p{
+        opacity: 50%; 
+        text-align: center;
+    }
+
+    .right{
+        width:80%; 
+        float:right; 
+        margin-top:100px;
+    }
+
+    .right_p{
+        opacity: 50%; 
+        float:right; 
+        margin-right:100px;
+    }
+
+    #omos{
+        grid-row: 5;
+        grid-column: 2/12;
+        background-color: rgba(235, 189, 0, .5);
+        margin-top:60px;
+        border-radius: 10px;
+    }
+
+    #omos img{
+        width:30%;
+        float: left;
+        padding:20px;
+        margin-top:30px;
+    }
+
+    .omsos{
+        float:right;
+        width: 70%;
+    }
+
+    .omos h1{
+        font-size: 3em;
+    }
+
+    #kontakt{
+        grid-row: 6;
+        grid-column: 1/13;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr); /* Der nestes et grid, for at kunne sætte tingene op lettere*/
+        grid-gap: 10px;
+        grid-auto-rows:minmax(100px, auto);
+        text-align: center;
+        background-color: rgba(102, 153, 153, .8);
+    }
+
+    #kundeservice{
+        grid-column: 2/4;
+    }
+
+    #openinghours{
+        grid-column: 5/8;
+    }
+
+    #adresse{
+        grid-column: 9/12;
+    }
+
+    /* #om_laboutique{
+        grid-column: 10/13;
+    } */
+
+
+
+    footer{
+        grid-row: 7;
+        grid-column: 2/12;
+        height: 200px;
+        margin-top:50px;
+        color:grey;
+        grid-template-columns: repeat(12, 1fr); /* Der nestes et grid, for at kunne sætte tingene op lettere*/
+        grid-gap: 10px;
+        grid-auto-rows:minmax(100px, auto);
+    }
+
+    #betalings{
+        grid-column: 1/5;
+        grid-row: 1;
+        float:left;
+    }
+
+    #betalings img{
+        width:70%;
+    }
+
+   #follow{
+        grid-column: 5/12;
+        grid-row: 1;
+        float:right;
+   }
+
+    .social{
+        width:60px;
+    }
+}   
